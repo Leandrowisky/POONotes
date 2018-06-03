@@ -38,7 +38,7 @@ public class CardDAO {
             if (novo.getTipo() == 3) {
                 //Em andamento
                 //
-                sql = "INSERT INTO card (idboard, titulo, tipo, cor, descricao, "//mudar descricao para imagem
+                sql = "INSERT INTO card (idboard, titulo, tipo, cor, conteudo, "
                         + "dataCriacao) VALUES (?, ?, ?, ?, ?, ?)";
 
                 stmt = cn.prepareStatement(sql);
@@ -54,7 +54,7 @@ public class CardDAO {
                 stmt.setDate(6, sqlDate);
 
             } else {
-                sql = "INSERT INTO card (idboard, titulo, tipo, cor, descricao, "
+                sql = "INSERT INTO card (idboard, titulo, tipo, cor, conteudo, "
                         + "dataCriacao) VALUES (?, ?, ?, ?, ?, ?)";
 
                 stmt = cn.prepareStatement(sql);
@@ -111,7 +111,7 @@ public class CardDAO {
             String cor = rs.getString("cor");
 
             //conteudo do card
-            Object conteudo = rs.getObject("descricao");
+            Object conteudo = rs.getObject("conteudo");
 
             //data de craicao do card
             java.util.Date utilDate = DataSupport.SqlDateToUtilDate(rs.getDate("dataCriacao"));
@@ -207,7 +207,7 @@ public class CardDAO {
                 String cor = rs.getString("cor");
 
                 //conteudo do card
-                Object conteudo = rs.getObject("descricao");
+                Object conteudo = rs.getObject("conteudo");
 
                 //data de craicao do card
                 java.util.Date utilDate = DataSupport.SqlDateToUtilDate(rs.getDate("dataCriacao"));
