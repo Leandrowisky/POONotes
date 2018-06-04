@@ -46,6 +46,12 @@ public class CardVideo extends Card {
         super.setDataCriacao(dataCriacao);
     }
 
+    public CardVideo(int idCard, String link, String titulo) {
+        this.link = link;
+        super.setIdCard(idCard);
+        super.setTitulo(titulo);
+    }
+
     public String getLink() {
         return link;
     }

@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class CardBuilder {
 
-    public static Card build(Object conteudo, int idCard, int idBoard,
+    public static Card buildFull(Object conteudo, int idCard, int idBoard,
             String titulo, int tipo, Date dataCriacao, boolean arquivado) {
 
         switch (tipo) {

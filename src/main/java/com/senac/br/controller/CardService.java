@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CardService {
 
-    public static void createCard(HttpServletRequest request) throws CardException {
+    public static void createCard(HttpServletRequest request)
+            throws CardException {
 
         Card novo;
 
@@ -68,10 +69,50 @@ public class CardService {
         }
     }
 
-    public static void alterCard(Card card) throws CardException {
+    public static void alterCard(HttpServletRequest request) throws CardException {
+
+        Card alterado;
 
         try {
-            CardDAO.alterCard(card);
+
+            //Obter informacoes da request
+            //idcard
+            int idcard = Integer.parseInt(request.getParameter("idcard"));
+
+            //tipo
+            String tipotxt = request.getParameter("tipo");
+            int tipo = Integer.parseInt(tipotxt);
+
+            //titulo
+            String titulo = request.getParameter("titulo");
+
+            //conteudo
+            //colocar o objeto de receber imagem aqui tbm
+            String conteudo = request.getParameter("conteudo");
+
+            //Insercao do card no banco de acordo com o seu tipo
+            switch (tipo) {
+                case 1:
+                    //cardsimples tipo 1
+                    Card simples = new CardSimple(idcard, conteudo, titulo);
+                    simples.setDesigne();
+                    CardDAO.alterCard(simples);
+                    break;
+                case 2:
+                    //cardvideo tipo 2
+                    Card video = new CardVideo(idcard, conteudo, titulo);
+                    video.setDesigne();
+                    CardDAO.alterCard(video);
+                    break;
+                case 3:
+                    //Aqui seria criado um cardPicture tipo 3
+                    Card picture = new CardPicture(idcard, conteudo, titulo);
+                    picture.setDesigne();
+                    CardDAO.alterCard(picture);
+                    break;
+                default:
+                    throw new CardException("Erro ao identificar tipo.");
+            }
         } catch (SQLException e) {
             throw new CardException("Erro ao Atualizar o Card.", e.getCause());
         }

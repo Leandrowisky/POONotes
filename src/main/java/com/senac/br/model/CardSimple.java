@@ -47,6 +47,15 @@ public class CardSimple extends Card {
         super.setTipo(tipo);
         super.setDataCriacao(dataCriacao);
     }
+    
+    public CardSimple(int idCard, String conteudo, String titulo) {
+        this.conteudo = conteudo;
+        super.setIdCard(idCard);
+        super.setTitulo(titulo);
+    }
+
+    public CardSimple() {
+    }
 
     public String getConteudo() {
         return conteudo;
@@ -59,7 +68,7 @@ public class CardSimple extends Card {
     //Methods
     @Override
     public void setDesigne() {
-        setCor("#ffff66");
+        setCor("#ffff8b");
     }
 
     @Override

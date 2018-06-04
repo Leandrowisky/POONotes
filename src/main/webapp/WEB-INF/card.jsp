@@ -27,27 +27,37 @@ Author     : aayan
             <!-- Content -->
             <div class="content">
 
-                <form id="form-cardsimples" action="${pageContext.request.contextPath}/card" method="post">
-                    <c:if test="${card.tipo == 1}">
-                        <input type="hidden" name="tipo" value="1">
-                        <input type="text" id="tituloid" name="titulo" value="${card.titulo}" />
-                        <textarea id="conteudoid" name="conteudo" cols="30" rows="10">${card.conteudo}</textarea>
-                    </c:if>
-                    <c:if test="${card.tipo == 2}">
-                        <input type="hidden" name="tipo" value="1">
-                        <input type="text" id="tituloid" name="titulo" value="${card.titulo}" />
-                        <input type="text" id="conteudoid" name="conteudo" value="${card.link}" />
-                        <iframe width="420" height="315" src="${card.link}"></iframe>
+                <div class="card-page">
 
-                    </c:if>
-                    <c:if test="${card.tipo == 3}">
-                        <input type="hidden" name="tipo" value="1">
-                        <input type="text" id="tituloid" name="titulo" value="${card.titulo}" />
-                        <textarea id="conteudoid" name="conteudo" cols="30" rows="10">${card.conteudo}</textarea>
-                    </c:if>
-                    <input type="submit" value="Alterar"/>
+                    <form id="form-alterador" action="${pageContext.request.contextPath}/card" method="post">
+                        <c:if test="${card.tipo == 1}">
+                            <input type="hidden" name="tipo" value="1">
+                            <input class="card-page-title" type="text" id="tituloid" name="titulo" value="${card.titulo}" required />
+                            <textarea class="card-page-content" id="conteudoid" name="conteudo" cols="30" rows="10">${card.conteudo}</textarea>
+                        </c:if>
+                        <c:if test="${card.tipo == 2}">
+                            <input type="hidden" name="tipo" value="2">
+                            <input class="card-page-title" type="text" id="tituloid" name="titulo" value="${card.titulo}" required />
+                            <input class="card-page-link" type="text" id="conteudoid" name="conteudo" value="${card.link}" />
+                            <iframe class="card-page-content" src="${card.link}"></iframe>
 
-                </form>
+                        </c:if>
+                        <c:if test="${card.tipo == 3}">
+                            <input type="hidden" name="tipo" value="3">
+                            <input class="card-page-title" type="text" id="tituloid" name="titulo" value="${card.titulo}" required />
+                            <input class="card-page-content" type="text" id="conteudoid" name="conteudo" value="${card.conteudo}" />
+                            <img src="${card.conteudo}"/>
+                        </c:if>
+                        <input type="hidden" name="idcard" value="${card.idCard}"/>
+                        <input type="submit" value="Alterar"/>
+
+                        <input type="hidden" id="arquivado" name="arquivado"/>
+                        <input type="submit" onclick="arquiveObject(${card.idCard})" value="Deletar"/>
+
+                    </form>
+
+                </div>
+
 
 
             </div>

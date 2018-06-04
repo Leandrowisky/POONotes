@@ -18,12 +18,6 @@ public class Board {
         this.dataCriacao = dataCriacao;
     }
 
-    public Board(String titulo, Date dataCriacao, int idUsuario) {
-        this.titulo = titulo;
-        this.dataCriacao = dataCriacao;
-        this.idUsuario = idUsuario;
-    }
-
     public Board(int idBoard, String titulo, CardList<Card> listCards) {
         this.idBoard = idBoard;
         this.titulo = titulo;
@@ -33,6 +27,12 @@ public class Board {
     public Board(int idBoard, String titulo) {
         this.idBoard = idBoard;
         this.titulo = titulo;
+    }
+    
+    public Board(String titulo, Date dataCriacao, int idUsuario) {
+        this.titulo = titulo;
+        this.dataCriacao = dataCriacao;
+        this.idUsuario = idUsuario;
     }
     
     //Getters & Settters

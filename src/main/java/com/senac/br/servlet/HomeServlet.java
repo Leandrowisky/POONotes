@@ -11,6 +11,7 @@ import com.senac.br.exception.CardException;
 import com.senac.br.model.Board;
 import com.senac.br.model.User;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -45,14 +46,38 @@ public class HomeServlet extends HttpServlet {
             Object user = request.getSession().getAttribute("usuario");
             User logado = (User) user;
 
-            //obter board default do banco
-            Board padrao = BoardService.GetBoardById(logado.getIdBoardDefault());
+            //obtem os boards do usuario
+            List<Board> listaDeBoardsDoUser
+                    = BoardService.GetBoardsByUser(logado.getIdUser());
+
+            //selecionando board
+            Board padrao;
+            if (request.getParameter("selectedBoard") != null) {
+                //conversaozinha
+                int boardSelecionadoId = Integer.parseInt(request.getParameter("selectedBoard"));
+
+                //obter board selecionado no menu
+                padrao = BoardService.GetBoardById(boardSelecionadoId);
+            } else if (request.getSession().getAttribute("idboard") != null) {
+                //conversaozinha
+                Object idObj = request.getSession().getAttribute("idboard");
+                int boardSelecionadoId = (int) idObj;
+
+                //obter board selecionado no menu
+                padrao = BoardService.GetBoardById(boardSelecionadoId);
+            } else {
+                //obter board default do banco
+                padrao = BoardService.GetBoardById(logado.getIdBoardDefault());
+            }
+
+            //adicionar a lista de boards do usuario ao request
+            request.getSession().setAttribute("boardList", listaDeBoardsDoUser);
 
             //adicionar o board ao request
             request.setAttribute("board", padrao);
-            
+
             //teste de adicionar a lista de cards direto no request
-            request.setAttribute("listaCards", padrao.getListCards());
+//            request.setAttribute("listaCards", padrao.getListCards());
 
             //adicionar o id do board atual a sessao
             request.getSession().setAttribute("idboard", padrao.getIdBoard());

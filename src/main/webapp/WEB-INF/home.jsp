@@ -45,14 +45,15 @@
 
                             <div class="card-content">
                                 <c:if test="${card.tipo == 1}">
-                                    ${card.conteudo}
+                                    <p>${card.conteudo}</p>
                                 </c:if>
-                                <c:if test="${card.tipo == 2}">
-                                    <iframe width="300" height="250" src="${card.link}"></iframe>
 
+                                <c:if test="${card.tipo == 2}">
+                                    <iframe src="${card.link}"></iframe>
                                 </c:if>
+
                                 <c:if test="${card.tipo == 3}">
-                                    ${card.conteudo}
+                                    <img src="${card.conteudo}"/>
                                 </c:if>
 
                             </div>
@@ -66,5 +67,7 @@
             </div>
 
         </div>
+
     </body>
+
 </html>

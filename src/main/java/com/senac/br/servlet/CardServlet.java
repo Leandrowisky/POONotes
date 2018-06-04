@@ -67,10 +67,23 @@ public class CardServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //enviar as informacoes do card alterado
-        //redireciona para home
-        response.sendRedirect("/poonotes/home");
+        try {
+            if (!request.getParameter("arquivado").equals("")) {
+                //Arquiva card
+                int idCard = Integer.parseInt(request.getParameter("arquivado"));
+                CardService.arquiveCard(idCard);
+                response.sendRedirect("/poonotes/home");
+            } else {
+                //Altera card
+                //enviar as informacoes do card alterado
+                CardService.alterCard(request);
+                //redireciona para home
+                response.sendRedirect("/poonotes/home");
+            }
 
+        } catch (CardException ex) {
+            Logger.getLogger(CardServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

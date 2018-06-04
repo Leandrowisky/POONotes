@@ -30,7 +30,7 @@ Author     : aayan
                 <div class="tab">
                     <button class="tablinks" onclick="openCardType(event, 'simples')" id="defaultOpen">Texto</button>
                     <button class="tablinks" onclick="openCardType(event, 'video')">Video</button>
-                    <button class="tablinks" onclick="openCardType(event, 'imagem')">Imagem</button>
+                    <button class="tablinks" onclick="openCardType(event, 'imagem')" hidden>Imagem</button>
                     <button class="tablinks" onclick="openCardType(event, 'board')">Board</button>
                 </div>
 
@@ -39,7 +39,7 @@ Author     : aayan
                         <input type="hidden" name="tipo" value="1">
                         <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
                         <textarea id="conteudoid" name="conteudo" cols="30" rows="10"></textarea>
-                        <input type="submit" value="Salvar"/>
+                        <input type="submit" form="form-cardsimples" value="Salvar"/>
                     </form>
                 </div>
 
@@ -48,16 +48,16 @@ Author     : aayan
                         <input type="hidden" name="tipo" value="2">
                         <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
                         <input type="text" id="conteudoid" name="conteudo" placeholder="Link do video(youtube)..." />
-                        <input type="submit" value="Salvar"/>
+                        <input type="submit" form="form-cardvideo" value="Salvar"/>
                     </form>
                 </div>
 
-                <div id="imagem" class="tabcontent">
-                    <form id="form-cardpicture" action="${pageContext.request.contextPath}/novo" method="post" enctype="multipart/form-data">
+                <div id="imagem" class="tabcontent" hidden>
+                    <form id="form-cardpicture" action="${pageContext.request.contextPath}/novo" method="post">
                         <input type="hidden" name="tipo" value="3">
                         <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
-                        <input type="text" id="conteudoid" name="imgLink" placeholder="Link da imagem...">
-                        <input type="submit" value="Salvar"/>
+                        <input type="text" id="conteudoid" name="conteudo" placeholder="Link da imagem...">
+                        <input type="submit" form="form-cardpicture" value="Salvar"/>
                     </form>
                 </div>
 
@@ -65,7 +65,7 @@ Author     : aayan
                     <form id="form-board" action="${pageContext.request.contextPath}/novoboard" method="post">
                         <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
                         <p>Teria umas opcoes de cores de fundo aqui.</p>
-                        <input type="submit" value="Salvar"/>
+                        <input type="submit" form="form-board" value="Salvar"/>
                     </form>
                 </div>
 

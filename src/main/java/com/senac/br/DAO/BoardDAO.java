@@ -1,7 +1,6 @@
 package com.senac.br.DAO;
 
 import com.senac.br.connection.ConnectionFactory;
-import com.senac.br.exception.CardException;
 import com.senac.br.model.Board;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,7 +18,7 @@ public class BoardDAO {
 
         PreparedStatement stmt = null;
 
-        String sql = "INSERT INTO board (titulo, dataCriacao) "
+        String sql = "INSERT INTO board (idusuario, titulo) "
                 + "VALUES (?, ?)";
 
         cn = ConnectionFactory.getConnection();
@@ -28,8 +27,8 @@ public class BoardDAO {
 
             stmt = cn.prepareStatement(sql);
 
-            stmt.setString(1, novo.getTitulo());
-            stmt.setDate(3, (java.sql.Date) novo.getDataCriacao());
+            stmt.setInt(1, novo.getIdUsuario());
+            stmt.setString(2, novo.getTitulo());
 
             boolean inserido = stmt.execute();
 
@@ -82,7 +81,8 @@ public class BoardDAO {
 
     }
 
-    public static void alterBoard(Board board) throws SQLException {
+    public static void alterBoard(Board board)
+            throws SQLException {
         PreparedStatement stmt = null;
 
         String sql = "UPDATE board SET titulo = ? "
@@ -105,20 +105,19 @@ public class BoardDAO {
         }
     }
 
-    public static void arquiveBoard(int board) throws SQLException {
+    public static void arquiveBoard(int idboard)
+            throws SQLException {
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE board SET arquivado = ? "
-                + "WHERE idBoard = ?";
+        String sql = "UPDATE board SET arquivado = true "
+                + "WHERE idboard = ?";
 
         cn = ConnectionFactory.getConnection();
 
         try {
             stmt = cn.prepareStatement(sql);
 
-            stmt.setBoolean(1, true);
-            //WHERE
-            stmt.setInt(2, board);
+            stmt.setInt(1, idboard);
             stmt.execute();
 
         } catch (SQLException e) {
@@ -128,7 +127,8 @@ public class BoardDAO {
         }
     }
 
-    public static List<Board> listBoard() throws SQLException {
+    public static List<Board> listBoard()
+            throws SQLException {
         ResultSet rs = null;
         PreparedStatement stmt = null;
         String sql = "";
@@ -158,13 +158,13 @@ public class BoardDAO {
         return listaBoard;
     }
 
-    public static List<Board> listBoardByUser(int idUsuario) throws SQLException {
+    public static List<Board> listBoardByUser(int idUsuario)
+            throws SQLException {
         ResultSet rs = null;
         PreparedStatement stmt = null;
-        String sql = "";
         List<Board> listaBoard = new ArrayList<>();
 
-        sql = "SELECT * FROM card WHERE idUsuario = ?";
+        String sql = "SELECT * FROM board WHERE idusuario = ? AND arquivado = 0";
 
         cn = ConnectionFactory.getConnection();
 

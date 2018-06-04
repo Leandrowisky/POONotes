@@ -38,11 +38,9 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession sessao = request.getSession();
-
         //Se o usuario estiver logado
         //Em testes
-        if (sessao.getAttribute("usuario") != null) {
+        if (request.getSession().getAttribute("usuario") != null) {
             response.sendRedirect("/home");
         } else {
             response.sendRedirect("/poonotes");
@@ -62,8 +60,6 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession sessao = request.getSession();
-
         try {
             //Obtem login e senha fornecidos na tela de login
             String login = request.getParameter("login");
@@ -80,8 +76,8 @@ public class LoginServlet extends HttpServlet {
                 //Cria o usuario com todas suas informacoes
                 User logado = LoginService.GetUser(login, senha);
                 //Coloca o usuario na sessao
-                sessao.setAttribute("usuario", logado);
-                
+                request.getSession().setAttribute("usuario", logado);
+
                 //Redireciona para o servlet home
                 response.sendRedirect(request.getContextPath() + "/home");
 

@@ -120,7 +120,7 @@ public class CardDAO {
             boolean arquivado = rs.getBoolean("arquivado");
 
             //retorna o card
-            return CardBuilder.build(conteudo, idcard, idboard, titulo, tipo, utilDate, arquivado);
+            return CardBuilder.buildFull(conteudo, idcard, idboard, titulo, tipo, utilDate, arquivado);
 
         } catch (SQLException e) {
             throw new SQLException("Erro ao Listar Card.(CardDAO)", e.getCause());
@@ -129,11 +129,12 @@ public class CardDAO {
         }
     }
 
-    public static void alterCard(Card card) throws SQLException {
+    public static void alterCard(Card card)
+            throws SQLException {
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE Card SET titulo = ?, cor = ?"
-                + "WHERE idCard = ?";
+        String sql = "UPDATE card SET titulo = ?, conteudo = ?"
+                + "WHERE idcard = ?";
 
         cn = ConnectionFactory.getConnection();
 
@@ -141,7 +142,7 @@ public class CardDAO {
             stmt = cn.prepareStatement(sql);
 
             stmt.setString(1, card.getTitulo());
-            stmt.setString(2, card.getCor());
+            stmt.setString(2, (String) card.getCardContent());
             //WHERE
             stmt.setInt(3, card.getIdCard());
             stmt.execute();
@@ -153,20 +154,19 @@ public class CardDAO {
         }
     }
 
-    public static void arquiveCard(int card) throws SQLException {
+    public static void arquiveCard(int card)
+            throws SQLException {
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE Card SET arquivado = ? "
-                + "WHERE idCard = ?";
+        String sql = "UPDATE card SET arquivado = true "
+                + "WHERE idcard = ?";
 
-        Connection cn = ConnectionFactory.getConnection();
+        cn = ConnectionFactory.getConnection();
 
         try {
             stmt = cn.prepareStatement(sql);
 
-            stmt.setBoolean(1, true);
-            //WHERE
-            stmt.setInt(2, card);
+            stmt.setInt(1, card);
             stmt.execute();
 
         } catch (SQLException e) {
