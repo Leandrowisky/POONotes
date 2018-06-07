@@ -132,6 +132,7 @@ body{
 	border-color: #a6a6a6;
 	border-radius: 5px;
 	font-family: inherit;
+	margin-top: 80px;
 }
 
 .cadastro-input{
@@ -170,7 +171,7 @@ body{
 	font-size: 20px;
 	font-family: inherit;
 	color: #fff;
-	background-color: #ec5252;
+	background-color: rgb(164, 161, 159);
 	border: 0px;
 	border-radius: 5px;
 }

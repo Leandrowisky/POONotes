@@ -34,38 +34,38 @@ Author     : aayan
                     <button class="tablinks" onclick="openCardType(event, 'board')">Board</button>
                 </div>
 
-                <div id="simples" class="tabcontent">
+                <div id="simples" class="tabcontent card-page">
                     <form id="form-cardsimples" action="${pageContext.request.contextPath}/novo" method="post">
                         <input type="hidden" name="tipo" value="1">
-                        <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
-                        <textarea id="conteudoid" name="conteudo" cols="30" rows="10"></textarea>
-                        <input type="submit" form="form-cardsimples" value="Salvar"/>
+                        <input class="card-page-title" type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
+                        <textarea class="card-page-content" id="conteudoid" name="conteudo" cols="30" rows="10"></textarea>
+                        <input class="btn-save" type="submit" form="form-cardsimples" value="Salvar"/>
                     </form>
                 </div>
 
-                <div id="video" class="tabcontent">
+                <div id="video" class="tabcontent card-page">
                     <form id="form-cardvideo" action="${pageContext.request.contextPath}/novo" method="post">
                         <input type="hidden" name="tipo" value="2">
-                        <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
-                        <input type="text" id="conteudoid" name="conteudo" placeholder="Link do video(youtube)..." />
-                        <input type="submit" form="form-cardvideo" value="Salvar"/>
+                        <input class="card-page-title" type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
+                        <input class="card-page-content" type="text" id="conteudoid" name="conteudo" placeholder="Link do video(youtube)..." />
+                        <input class="btn-save" type="submit" form="form-cardvideo" value="Salvar"/>
                     </form>
                 </div>
 
-                <div id="imagem" class="tabcontent" hidden>
+                <div id="imagem" class="tabcontent card-page" hidden>
                     <form id="form-cardpicture" action="${pageContext.request.contextPath}/novo" method="post">
                         <input type="hidden" name="tipo" value="3">
-                        <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
-                        <input type="text" id="conteudoid" name="conteudo" placeholder="Link da imagem...">
-                        <input type="submit" form="form-cardpicture" value="Salvar"/>
+                        <input class="card-page-title" type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
+                        <input class="card-page-content" type="text" id="conteudoid" name="conteudo" placeholder="Link da imagem...">
+                        <input class="btn-save" type="submit" form="form-cardpicture" value="Salvar"/>
                     </form>
                 </div>
 
-                <div id="board" class="tabcontent">
+                <div id="board" class="tabcontent card-page">
                     <form id="form-board" action="${pageContext.request.contextPath}/novoboard" method="post">
-                        <input type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
+                        <input class="card-page-title" type="text" id="tituloid" name="titulo" placeholder="Titulo..." />
                         <p>Teria umas opcoes de cores de fundo aqui.</p>
-                        <input type="submit" form="form-board" value="Salvar"/>
+                        <input class="btn-save" type="submit" form="form-board" value="Salvar"/>
                     </form>
                 </div>
 
